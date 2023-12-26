@@ -1,0 +1,3 @@
+[workspace]
+members = ["ftime", "ftime_v2"]
+resolver = "2"
