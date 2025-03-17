@@ -1,4 +1,6 @@
-// строка с кабиком Ferris
+use chrono::Local;
+use owo_colors::OwoColorize;
+
 const FERRIS: &str = r#"
     _~^~^~_
 \) /  o o  \ (/
@@ -7,16 +9,15 @@ const FERRIS: &str = r#"
 "#;
 
 fn main() {
-    // с помощью последовательностей ANSI
-    // очистите экран терминала и сделайте курсор невидимым
+    print!("\x1B[2J");
+    print!("\x1B[?25l");
 
     loop {
-        // выведите время в формате `часы-мин-сек` (цвет blue)
-        // и крабика Ferris (цвет yellow)
-
-        // после кужно переместить курсор вверх не несколько строк
-        // для новой итерации
-
-        // подумайте, как часто вы хотите обновлять время
+        let local = Local::now().format("%H:%M:%S");
+        println!("   {}", local.blue());
+        println!("{}", FERRIS.yellow());
+        print!("\x1B[2J");
+        print!("\x1B[7A");
+        std::thread::sleep(std::time::Duration::from_secs(1));
     }
 }
